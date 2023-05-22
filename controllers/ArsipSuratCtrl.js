@@ -80,7 +80,8 @@ const UploadSurat = async (req, res) => {
         jabatan: cariUser.jabatan,
       },
     };
-    file.mv(`./public/arsip/${fileName}`, async (err) => {
+
+    await file.mv(`./public/arsip/${fileName}`, async (err) => {
       // file.mv(`${__dirname}/../public/arsip/${fileName}`, async (err) => {
       if (err) {
         return res.status(500).json({ msg: err.message });
@@ -249,14 +250,14 @@ const EditSurat = async (req, res, next) => {
         return res.status(400).json({ message: "Email sudah digunakan" });
       }
     } else {
-      file.mv(`./public/arsip/${fileName}`, async (err) => {
+      await file.mv(`./public/arsip/${fileName}`, async (err) => {
         if (err) {
           console.log(err);
           return res.status(500).json({ msg: err.message });
         }
       });
       const filePath = `public/arsip/${cariArsip.file}`;
-      fs.unlink(filePath, (err) => {
+      await fs.unlink(filePath, (err) => {
         console.log(err);
       });
       const UpdateSurat = await ArsipSurat.findOneAndUpdate(
@@ -326,7 +327,7 @@ const HapusSurat = async (req, res) => {
     console.log(cariArsip);
 
     const filePath = `public/arsip/${cariArsip.file}`;
-    fs.unlink(filePath, (err) => {
+    await fs.unlink(filePath, (err) => {
       console.log(err);
     });
     await ArsipSurat.findByIdAndDelete(_id);
