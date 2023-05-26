@@ -38,11 +38,11 @@ const Login = async (req, res) => {
     if (!User) {
       if (email === process.env.ADMINEMAIL && password === process.env.ADMINPASS) {
         const passwordTerenkripsi = await EnkripsiPassword(password);
-        const UserBaru = new Users({ nama: "admin", email: email, password: passwordTerenkripsi });
+        const UserBaru = new Users({ nama: "sekertaris desa", email: email, password: passwordTerenkripsi });
         await UserBaru.save();
         User = UserBaru;
       } else {
-        return res.status(400).json({ msg: "email atau password salah" });
+        return res.status(401).json({ msg: "email atau password salah" });
       }
     }
     const isPasswordValid = await bcrypt.compare(password, User.password);
@@ -111,7 +111,7 @@ const Edit = async (req, res) => {
 
 const Hapus = async (req, res) => {
   try {
-    const user = req.user;
+    console.log(req.body);
     const { _id } = req.body;
     console.log(_id);
     const cariUser = await Users.findOne({ _id: _id });

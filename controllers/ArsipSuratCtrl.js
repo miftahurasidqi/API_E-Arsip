@@ -5,13 +5,6 @@ const path = require("path");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
 
-// nama:
-// nomor:
-// tanggal:
-// jenis:
-// file:
-// urlFile:
-// user:
 const generetName = async (len) => {
   const lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
   const upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

@@ -22,7 +22,7 @@ const UsersSchema = new Schema({
   jabatan: {
     type: String,
     enum: ["kepala desa", "sekertaris desa", "kaur", "admin"],
-    default: "admin",
+    default: "sekertaris desa",
   },
 });
 

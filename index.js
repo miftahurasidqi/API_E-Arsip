@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const ArsipSuratRoute = require("./routes/ArsipSuratRoute");
 const UserRoute = require("./routes/UserRoute");
+const test = require("./routes/test");
 
 dotenv.config();
 const app = express();
@@ -16,11 +17,12 @@ app.use(express.static("public"));
 
 app.use("/arsipsurat", ArsipSuratRoute);
 app.use("/user", UserRoute);
+app.use("/test", test);
 app.use("/", (req, res) => {
   res.json({ msg: "api run" });
 });
 
-const PORT = process.env.PORT || 3290;
+const PORT = process.env.PORT;
 const ConectionsMongoDB = process.env.MONGO_URI;
 mongoose
   .connect(ConectionsMongoDB)
